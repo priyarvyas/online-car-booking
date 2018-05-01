@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCarBooking
 {
-    class Car
+    public class Car
     {
         string name;
         string model;

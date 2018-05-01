@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCarBooking
 {
-    class Booking
+    public class Booking
     {
         Customer customer;
         DateTime pickupDate;

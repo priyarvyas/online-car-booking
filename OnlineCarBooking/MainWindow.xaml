@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:OnlineCarBooking"
         mc:Ignorable="d" WindowState="Maximized"
         Title="MainWindow" Height="800" Width="1000">
+    <Window.Resources>
+        <local:MyConverter x:Key="MyConverter"/>
+    </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="800">
             <StackPanel Orientation="Vertical">
@@ -48,7 +51,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblAvailCar" Content="Available Cars: " Width="150" />
-                            <ListBox Width="150" Height="50" />
+                            <ListBox Width="150" Height="50" Name="lstAvailCar" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerFName" Content="Customer First Name: " Width="150" />
@@ -85,15 +88,23 @@
 
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
-                        <DataGrid x:Name="appointmentGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
+                            <DataGrid x:Name="appointmentGrid" ItemsSource="{Binding bookingList}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="PickupTime" Binding="{Binding PickupTime,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropOffDate,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropOffTime,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="BookedCar" Binding="{Binding BookedCar,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="CustomerName" Binding="{Binding CustomerName,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="LicenceNo" Binding="{Binding LicenceNo,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay, StringFormat=d}" Width="80"/>
+                                <DataGridTextColumn Header="PickupTime" Binding="{Binding PickTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropoffDate,Mode=OneWay, StringFormat=d}" Width="80"/>
+                                <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropoffTime,Mode=OneWay}" Width="80"/>
+                                <DataGridTextColumn Header="BookedCar" Binding="{Binding Car.Name,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="Date" Width="100"
+                                    Binding="{Binding Car.NoOfSeats, Mode=OneWay}">
+                                        <DataGridTextColumn.CellStyle>
+                                            <Style TargetType="{x:Type DataGridCell}">
+                                                <Setter Property="Foreground" Value="{Binding Car.NoOfSeats, Converter={StaticResource MyConverter}}" />
+                                            </Style>
+                                        </DataGridTextColumn.CellStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="CustomerName" Binding="{Binding Customer.FullName,Mode=OneWay}" Width="80"/>
+                                <DataGridTextColumn Header="LicenceNo" Binding="{Binding Customer.DrivingLicenseNo,Mode=OneWay}" Width="80"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         </StackPanel>
