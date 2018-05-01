@@ -36,6 +36,10 @@ namespace OnlineCarBooking
 
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
+        public string FullName
+        {
+            get => FirstName + " " + LastName;
+        }
         public string Address { get => address; set => address = value; }
         public string City { get => city; set => city = value; }
         public string PostalCode { get => postalCode; set => postalCode = value; }

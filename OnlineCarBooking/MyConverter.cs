@@ -14,7 +14,7 @@ namespace OnlineCarBooking
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((int)value > 6) ? Brushes.Black : Brushes.Red;
+            return ((uint)value > 5) ? Brushes.Red : Brushes.White;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

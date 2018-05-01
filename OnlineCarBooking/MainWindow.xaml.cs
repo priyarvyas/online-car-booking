@@ -93,7 +93,9 @@ namespace OnlineCarBooking
             cmbSeatNo.ItemsSource = listSeatNo;
             cmbSeatNo.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// File saving
+        /// </summary>
         private void WriteToXML()
         {
             try
@@ -108,7 +110,9 @@ namespace OnlineCarBooking
                 MessageBox.Show("Error writing to XML" + e.Message);
             }
         }
-
+        /// <summary>
+        /// File retriving
+        /// </summary>
         private void ReadFromXML()
         {
             
@@ -378,12 +382,8 @@ namespace OnlineCarBooking
 
                 Booking booking = new Booking(pickupDate, pickupTime, dropoffDate, dropoffTime, customer, selectedCar);
                 Bookings.Add(booking);
-                bookingGrid.ItemsSource = Bookings;
-                bookingGrid.Items.Refresh();
-                WriteToXML();
-                
+                WriteToXML();    
             }
-            
         }
 
         private bool CheckPhoneNo(string phoneNo)
@@ -426,11 +426,29 @@ namespace OnlineCarBooking
                 return false;
             }
         }
+        /// <summary>
+        /// Data binding
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDisplay_Click(object sender, RoutedEventArgs e)
+        {
+            ReadFromXML();
+            bookingGrid.ItemsSource = Bookings;
+            bookingGrid.Items.Refresh();
+        }
 
-
-
-
-
-
+        /// <summary>
+        /// LINQ implementation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ReadFromXML();
+            string carName = txtSearch.Text;
+            var query = (from b in Bookings.bookings where b.Car.Name.Contains(carName) select b);
+            bookingGrid.ItemsSource = query;
+        }
     }
 }

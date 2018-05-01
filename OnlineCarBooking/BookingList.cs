@@ -14,8 +14,11 @@ namespace OnlineCarBooking
     {
         [XmlArray("Bookings")]
         [XmlArrayItem("Booking")]
+        
         public ObservableCollection<Booking> bookings = null;
-
+        /// <summary>
+        /// use of collections
+        /// </summary>
         public BookingList()
         {
             bookings = new ObservableCollection<Booking>();

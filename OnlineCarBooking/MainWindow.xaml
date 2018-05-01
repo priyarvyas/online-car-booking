@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:OnlineCarBooking"
         mc:Ignorable="d" WindowState="Maximized"
         Title="MainWindow" Height="800" Width="1500">
+    <Window.Resources>
+        <local:MyConverter x:Key="MyConverter"/>
+    </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="800">
             <StackPanel Orientation="Vertical">
@@ -98,6 +101,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblErrorMessage" Content="" Width="auto" Height="auto" Foreground="Red" FontSize="16" />
+                            <Button x:Name="btnDisplay" Content="Display" Width="75" Click="btnDisplay_Click"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -105,19 +109,27 @@
                         <StackPanel Orientation="Horizontal">
                             <DataGrid x:Name="bookingGrid" ItemsSource="{Binding Bookings}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="Auto">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="PickupTime" Binding="{Binding PickupTime,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropOffDate,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropOffTime,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="BookedCar" Binding="{Binding BookedCar,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="CustomerName" Binding="{Binding CustomerName,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="LicenceNo" Binding="{Binding LicenceNo,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="Pickup Date" Binding="{Binding PickupDate,Mode=OneWay, StringFormat=d}" Width="80"/>
+                                    <DataGridTextColumn Header="Pickup Time" Binding="{Binding PickTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOff Date" Binding="{Binding DropoffDate,Mode=OneWay, StringFormat=d}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOff Time" Binding="{Binding DropoffTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTemplateColumn Header="Booked Car" Width="120" IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <!--changing background cell color to red when booked car is more than 5 seater car-->
+                                                <TextBlock Text="{Binding Car.Name,Mode=OneWay}" Background="{Binding Car.NoOfSeats, Converter={StaticResource MyConverter}}"></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Customer Name" Binding="{Binding Customer.FullName,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="Licence No" Binding="{Binding Customer.DrivingLicenseNo,Mode=OneWay}" Width="80"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10 25 0 0">
                             <Label Name="lblSearch" Content="Car Name: " Width="150" />
-                            <TextBox Name="txtSearch" Width="150" />
+                            <TextBox x:Name="txtSearch" Width="150" />
+                            <Button Content="Search" Width="96" Click="Button_Click"/>
                         </StackPanel>
                     </StackPanel>
 
