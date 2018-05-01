@@ -27,7 +27,7 @@ namespace OnlineCarBooking
     {
         List<string> listTime = new List<string>() { "10AM", "11AM", "12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM" };
         List<string> listSeatNo = new List<string>() { string.Empty,"2", "4", "5", "7","8" };
-        List<string> listSearch = new List<string>() { "", "4", "5", "6" };
+        
         BookingList bookings;
         private static Dictionary<int, List<Car>> carList;
         public Dictionary<int, List<Car>> CarList
@@ -167,8 +167,42 @@ namespace OnlineCarBooking
             txtDrivingLicenceNo.BorderBrush = Brushes.Black;
             txtDrivingLicenceNo.BorderThickness = new Thickness(1);
         }
+
+        private void listAvailCar_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            listAvailCar.BorderBrush = Brushes.Black;
+            listAvailCar.BorderThickness = new Thickness(1);
+        }
+
+        private void cmbPickupTime_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            cmbPickupTime.BorderBrush = Brushes.Black;
+            cmbPickupTime.BorderThickness = new Thickness(1);
+        }
+
+        private void cmbDropOffTime_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            cmbDropOffTime.BorderBrush = Brushes.Black;
+            cmbDropOffTime.BorderThickness = new Thickness(1);
+        }
+
+        private void dpPickupDate_SelectedDateChanged(object sender, RoutedEventArgs e)
+        {
+            dpPickupDate.BorderBrush = Brushes.Black;
+            dpPickupDate.BorderThickness = new Thickness(1);
+        }
+
+        private void dpDropOffDate_SelectedDateChanged(object sender, RoutedEventArgs e)
+        {
+            dpDropOffDate.BorderBrush = Brushes.Black;
+            dpDropOffDate.BorderThickness = new Thickness(1);
+        }
+
         private void cmbSeatNo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            cmbSeatNo.BorderBrush = Brushes.Black;
+            cmbSeatNo.BorderThickness = new Thickness(1);
+
             string vSeatNo = cmbSeatNo.SelectedItem.ToString();
 
             Car c = new Car();
@@ -211,11 +245,21 @@ namespace OnlineCarBooking
                 txtPhoneNo.BorderThickness = new Thickness(5);
                 lblErrorMessage.Content += "Please enter Phone Number " + Environment.NewLine;
             }
+            else if (txtPhoneNo.Text.Length < 10)
+            {
+                result = false;
+                txtPhoneNo.BorderBrush = Brushes.Red;
+                txtPhoneNo.BorderThickness = new Thickness(5);
+                lblErrorMessage.Content += "Phone number must be 10 digit " + Environment.NewLine;
+            }
             else if (!CheckPhoneNo(txtPhoneNo.Text))
             {
                 result = false;
+                txtPhoneNo.BorderBrush = Brushes.Red;
+                txtPhoneNo.BorderThickness = new Thickness(5);
                 lblErrorMessage.Content += "Phone number is not valid " + Environment.NewLine;
             }
+            
             if (txtAddress.Text.Length == 0)
             {
                 result = false;
@@ -240,6 +284,8 @@ namespace OnlineCarBooking
             else if (!IsValidPostalCode(txtPostalCode.Text))
             {
                 result = false;
+                txtPostalCode.BorderBrush = Brushes.Red;
+                txtPostalCode.BorderThickness = new Thickness(5);
                 lblErrorMessage.Content += "Postal Code is not valid " + Environment.NewLine;
             }
             if (txtDrivingLicenceNo.Text.Length == 0)
@@ -255,6 +301,20 @@ namespace OnlineCarBooking
                 cmbSeatNo.BorderBrush = Brushes.Red;
                 cmbSeatNo.BorderThickness = new Thickness(5);
                 lblErrorMessage.Content += "Please select Seat No " + Environment.NewLine;
+            }
+            if (cmbPickupTime.Text.Length == 0)
+            {
+                result = false;
+                cmbPickupTime.BorderBrush = Brushes.Red;
+                cmbPickupTime.BorderThickness = new Thickness(5);
+                lblErrorMessage.Content += "Please select Pickup Date " + Environment.NewLine;
+            }
+            if (cmbDropOffTime.Text.Length == 0)
+            {
+                result = false;
+                cmbDropOffTime.BorderBrush = Brushes.Red;
+                cmbDropOffTime.BorderThickness = new Thickness(5);
+                lblErrorMessage.Content += "Please select Drop-Off Date " + Environment.NewLine;
             }
             if (cmbPickupTime.Text.Length == 0)
             {
@@ -277,7 +337,28 @@ namespace OnlineCarBooking
                 listAvailCar.BorderThickness = new Thickness(5);
                 lblErrorMessage.Content += "Please select available car " + Environment.NewLine;
             }
-            if(result)
+            if(dpPickupDate.SelectedDate.Value.Date < DateTime.Today)
+            {
+                result = false;
+                dpPickupDate.BorderBrush = Brushes.Red;
+                dpPickupDate.BorderThickness = new Thickness(5);
+                lblErrorMessage.Content += "Please select future date for Pickup date " + Environment.NewLine;
+            }
+            if (dpDropOffDate.SelectedDate.Value.Date < DateTime.Today)
+            {
+                result = false;
+                dpDropOffDate.BorderBrush = Brushes.Red;
+                dpDropOffDate.BorderThickness = new Thickness(5);
+                lblErrorMessage.Content += "Please select future date for Drop-off date " + Environment.NewLine;
+            }
+            else if (dpPickupDate.SelectedDate.Value.Date == dpDropOffDate.SelectedDate.Value.Date)
+            {
+                result = false;
+                dpDropOffDate.BorderBrush = Brushes.Red;
+                dpDropOffDate.BorderThickness = new Thickness(5);
+                lblErrorMessage.Content += "Drop-Off date should be greater than Pick-up date " + Environment.NewLine;
+            }
+            if (result)
             {
                 string firstName = txtCustomerFName.Text;
                 string lastName = txtCustomerLName.Text;

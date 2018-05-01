@@ -25,20 +25,14 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPickupDate" Content="Pickup Date: " Foreground="Black" Width="150" />
-                            <DatePicker x:Name="dpPickupDate" Height="25" Width="150" >
-                                <DatePicker.SelectedDate>
-                                    <Binding Path="Booking.PickupDate" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:DateValidation/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </DatePicker.SelectedDate>
+                            <DatePicker x:Name="dpPickupDate" Height="25" Width="150" SelectedDateChanged="dpPickupDate_SelectedDateChanged" >
+                                
                             </DatePicker>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblDropOffDate" Content="Drop-Off Date: " Foreground="Black" Width="150" />
-                            <DatePicker x:Name="dpDropOffDate" Height="25" Width="150" />
+                            <DatePicker x:Name="dpDropOffDate" Height="25" Width="150" SelectedDateChanged="dpDropOffDate_SelectedDateChanged" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="10">
@@ -76,17 +70,19 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPickupTime" Content="Pickup Time: " Width="150" />
-                            <ComboBox Name="cmbPickupTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbPickupTime_Loaded">
+                            <ComboBox Name="cmbPickupTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" 
+                             Loaded="cmbPickupTime_Loaded" SelectionChanged="cmbPickupTime_SelectionChanged">
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblDropOffTime" Content="Drop-Off Time: " Width="150" />
-                            <ComboBox Name="cmbDropOffTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbDropOffTime_Loaded">
+                            <ComboBox Name="cmbDropOffTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" 
+                             Loaded="cmbDropOffTime_Loaded" SelectionChanged="cmbDropOffTime_SelectionChanged">
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblAvailCar" Content="Available Cars: " Width="150" />
-                            <ListBox Name="listAvailCar" Width="150" Height="154" ItemsSource="{Binding Path=listSeatNo/CarList}" />
+                            <ListBox Name="listAvailCar" Width="200" Height="70" ItemsSource="{Binding Path=listSeatNo/CarList}" SelectionChanged="listAvailCar_SelectionChanged" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerLName" Content="Customer Last Name: " Width="150" />
