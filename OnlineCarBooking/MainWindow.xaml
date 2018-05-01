@@ -5,10 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OnlineCarBooking"
         mc:Ignorable="d" WindowState="Maximized"
-        Title="MainWindow" Height="800" Width="1000">
-    <Window.Resources>
-        <local:MyConverter x:Key="MyConverter"/>
-    </Window.Resources>
+        Title="MainWindow" Height="800" Width="1500">
     <Grid>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="800">
             <StackPanel Orientation="Vertical">
@@ -24,43 +21,31 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPickupDate" Content="Pickup Date: " Foreground="Black" Width="150" />
                             <DatePicker x:Name="dpPickupDate" Height="25" Width="150" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label Name="lblPickupTime" Content="Pickup Time: " Width="150" />
-                            <ComboBox Name="cmbPickupTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbPickupTime_Loaded">
-                            </ComboBox>
-                        </StackPanel>
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblDropOffDate" Content="Drop-Off Date: " Foreground="Black" Width="150" />
                             <DatePicker x:Name="dpDropOffDate" Height="25" Width="150" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label Name="lblDropOffTime" Content="Drop-Off Time: " Width="150" />
-                            <ComboBox Name="cmbDropOffTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbDropOffTime_Loaded">
-                            </ComboBox>
-                        </StackPanel>
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblSeatNo" Content="No of Seats: " Width="150" />
-                            <ComboBox Name="cmbSeatNo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbSeatNo_Loaded">
+                            <ComboBox Name="cmbSeatNo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" 
+                             Loaded="cmbSeatNo_Loaded" SelectionChanged="cmbSeatNo_SelectionChanged"
+                                      ItemsSource="{Binding Path=listSeatNo}">
                             </ComboBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label Name="lblAvailCar" Content="Available Cars: " Width="150" />
-                            <ListBox Width="150" Height="50" Name="lstAvailCar" />
-                        </StackPanel>
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerFName" Content="Customer First Name: " Width="150" />
                             <TextBox Name="txtCustomerFName" Width="150" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label Name="lblCustomerLName" Content="Customer Last Name: " Width="150" />
-                            <TextBox Name="txtCustomerLName" Width="150" />
-                        </StackPanel>
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPhoneNo" Content="Phone Number: " Width="150" />
                             <TextBox Name="txtPhoneNo" Width="150" />
@@ -69,51 +54,66 @@
                             <Label Name="lblAddress" Content="Address: " Width="150" />
                             <TextBox Name="txtAddress" Width="150" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label Name="lblPostalCode" Content="Postal Code: " Width="150" />
-                            <TextBox Name="txtPostalCode" Width="150" />
-                        </StackPanel>
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCity" Content="City: " Width="150" />
                             <TextBox Name="txtCity" Width="150" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <Label Name="lblDrivingLicenceNo" Content="Driving Licence No: " Width="150" />
-                            <TextBox Name="txtDrivingLicenceNo" Width="150" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="60 10 10 10">
+
+                        <StackPanel Orientation="Horizontal" Margin="100 10 10 10">
                             <Button x:Name="btnCarBook" Content="Book The Car" Height="36" Width="214" Click="btnCarBook_Click" />
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <DataGrid x:Name="appointmentGrid" ItemsSource="{Binding bookingList}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-                            <DataGrid.Columns>
-                                    <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay, StringFormat=d}" Width="80"/>
-                                <DataGridTextColumn Header="PickupTime" Binding="{Binding PickTime,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropoffDate,Mode=OneWay, StringFormat=d}" Width="80"/>
-                                <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropoffTime,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="BookedCar" Binding="{Binding Car.Name,Mode=OneWay}" Width="80"/>
-                                    <DataGridTextColumn Header="Date" Width="100"
-                                    Binding="{Binding Car.NoOfSeats, Mode=OneWay}">
-                                        <DataGridTextColumn.CellStyle>
-                                            <Style TargetType="{x:Type DataGridCell}">
-                                                <Setter Property="Foreground" Value="{Binding Car.NoOfSeats, Converter={StaticResource MyConverter}}" />
-                                            </Style>
-                                        </DataGridTextColumn.CellStyle>
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="CustomerName" Binding="{Binding Customer.FullName,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="LicenceNo" Binding="{Binding Customer.DrivingLicenseNo,Mode=OneWay}" Width="80"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblPickupTime" Content="Pickup Time: " Width="150" />
+                            <ComboBox Name="cmbPickupTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbPickupTime_Loaded">
+                            </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblDropOffTime" Content="Drop-Off Time: " Width="150" />
+                            <ComboBox Name="cmbDropOffTime" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Loaded="cmbDropOffTime_Loaded">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblAvailCar" Content="Available Cars: " Width="150" />
+                            <ListBox Name="listAvailCar" Width="150" Height="154" ItemsSource="{Binding Path=listSeatNo/CarList}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblCustomerLName" Content="Customer Last Name: " Width="150" />
+                            <TextBox Name="txtCustomerLName" Width="150" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblPostalCode" Content="Postal Code: " Width="150" />
+                            <TextBox Name="txtPostalCode" Width="150" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblDrivingLicenceNo" Content="Driving Licence No: " Width="150" />
+                            <TextBox Name="txtDrivingLicenceNo" Width="150" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="50 10 10 10">
+                        <StackPanel Orientation="Horizontal">
+                            <DataGrid x:Name="appointmentGrid" ItemsSource="{Binding Bookings}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="PickupTime" Binding="{Binding PickupTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropOffDate,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropOffTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="BookedCar" Binding="{Binding BookedCar,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="CustomerName" Binding="{Binding CustomerName,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="LicenceNo" Binding="{Binding LicenceNo,Mode=OneWay}" Width="80"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 25 0 0">
                             <Label Name="lblSearch" Content="Car Name: " Width="150" />
                             <TextBox Name="txtSearch" Width="150" />
                         </StackPanel>
                     </StackPanel>
-                    
+
                 </StackPanel>
             </StackPanel>
         </StackPanel>

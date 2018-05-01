@@ -13,7 +13,7 @@ namespace OnlineCarBooking
     {
         [XmlArray("Bookings")]
         [XmlArrayItem("Booking")]
-        public ObservableCollection<Booking> bookings;
+        public ObservableCollection<Booking> bookings = null;
 
         public BookingList()
         {
