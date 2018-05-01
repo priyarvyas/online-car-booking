@@ -126,12 +126,6 @@ namespace OnlineCarBooking
             }
         }
 
-            if (vSeatNo == "2")
-            {
-                
-            }
-        }
-
         private void txtCustomerFName_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtCustomerFName.BorderBrush = Brushes.Black;
@@ -172,27 +166,6 @@ namespace OnlineCarBooking
         {
             txtDrivingLicenceNo.BorderBrush = Brushes.Black;
             txtDrivingLicenceNo.BorderThickness = new Thickness(1);
-        private void btnCarBook_Click(object sender, RoutedEventArgs e)
-        {
-            string firstName = txtCustomerFName.Text;
-            string lastName = txtCustomerLName.Text;
-            string address = txtAddress.Text;
-            string city = txtCity.Text;
-            string postalCode = txtPostalCode.Text;
-            string licenseNo = txtDrivingLicenceNo.Text;
-            ulong phoneNumber = ulong.Parse(txtPhoneNo.Text);
-
-            Customer customer = new Customer(firstName, lastName, address, city, postalCode, licenseNo, phoneNumber);
-
-            DateTime pickupDate = dpPickupDate.SelectedDate.Value.Date;
-            string pickupTime = cmbPickupTime.Text;
-            DateTime dropoffDate = dpDropOffDate.SelectedDate.Value.Date;
-            string dropoffTime = cmbDropOffTime.Text;
-            Car selectedCar = (Car)listAvailCar.SelectedItem;
-
-            Booking booking = new Booking(pickupDate, pickupTime, dropoffDate, dropoffTime, customer, selectedCar);
-            Bookings.Add(booking);
-            WriteToXML();
         }
         private void cmbSeatNo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -304,7 +277,29 @@ namespace OnlineCarBooking
                 listAvailCar.BorderThickness = new Thickness(5);
                 lblErrorMessage.Content += "Please select available car " + Environment.NewLine;
             }
+            if(result)
+            {
+                string firstName = txtCustomerFName.Text;
+                string lastName = txtCustomerLName.Text;
+                string address = txtAddress.Text;
+                string city = txtCity.Text;
+                string postalCode = txtPostalCode.Text;
+                string licenseNo = txtDrivingLicenceNo.Text;
+                ulong phoneNumber = ulong.Parse(txtPhoneNo.Text);
 
+                Customer customer = new Customer(firstName, lastName, address, city, postalCode, licenseNo, phoneNumber);
+
+                DateTime pickupDate = dpPickupDate.SelectedDate.Value.Date;
+                string pickupTime = cmbPickupTime.Text;
+                DateTime dropoffDate = dpDropOffDate.SelectedDate.Value.Date;
+                string dropoffTime = cmbDropOffTime.Text;
+                Car selectedCar = (Car)listAvailCar.SelectedItem;
+
+                Booking booking = new Booking(pickupDate, pickupTime, dropoffDate, dropoffTime, customer, selectedCar);
+                Bookings.Add(booking);
+                WriteToXML();
+            }
+            
         }
 
         private bool CheckPhoneNo(string phoneNo)
