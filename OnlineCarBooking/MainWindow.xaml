@@ -21,7 +21,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    
+
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPickupDate" Content="Pickup Date: " Foreground="Black" Width="150" />
@@ -35,12 +35,12 @@
                                 </DatePicker.SelectedDate>
                             </DatePicker>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblDropOffDate" Content="Drop-Off Date: " Foreground="Black" Width="150" />
                             <DatePicker x:Name="dpDropOffDate" Height="25" Width="150" />
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblSeatNo" Content="No of Seats: " Width="150" />
                             <ComboBox Name="cmbSeatNo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" 
@@ -48,12 +48,12 @@
                                       ItemsSource="{Binding Path=listSeatNo}">
                             </ComboBox>
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerFName" Content="Customer First Name: " Width="150" />
                             <TextBox Name="txtCustomerFName" Width="150" TextChanged="txtCustomerFName_TextChanged" />
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPhoneNo" Content="Phone Number: " Width="150" />
                             <TextBox Name="txtPhoneNo" Width="150" TextChanged="txtPhoneNo_TextChanged" />
@@ -62,12 +62,12 @@
                             <Label Name="lblAddress" Content="Address: " Width="150" />
                             <TextBox Name="txtAddress" Width="150" TextChanged="txtAddress_TextChanged" />
                         </StackPanel>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCity" Content="City: " Width="150" />
                             <TextBox Name="txtCity" Width="150" TextChanged="txtCity_TextChanged" />
                         </StackPanel>
-                       
+
                         <StackPanel Orientation="Horizontal" Margin="100 10 10 10">
                             <Button x:Name="btnCarBook" Content="Book The Car" Height="36" Width="214" Click="btnCarBook_Click" />
                         </StackPanel>
@@ -86,7 +86,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblAvailCar" Content="Available Cars: " Width="150" />
-                            <ListBox Name="listAvailCar" Width="150" Height="50" ItemsSource="{Binding Path=listSeatNo/CarList}" />
+                            <ListBox Name="listAvailCar" Width="150" Height="154" ItemsSource="{Binding Path=listSeatNo/CarList}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerLName" Content="Customer Last Name: " Width="150" />
@@ -107,24 +107,24 @@
 
                     <StackPanel Orientation="Vertical" Margin="50 10 10 10">
                         <StackPanel Orientation="Horizontal">
-                        <DataGrid x:Name="appointmentGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="PickupTime" Binding="{Binding PickupTime,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropOffDate,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropOffTime,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="BookedCar" Binding="{Binding BookedCar,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="CustomerName" Binding="{Binding CustomerName,Mode=OneWay}" Width="80"/>
-                                <DataGridTextColumn Header="LicenceNo" Binding="{Binding LicenceNo,Mode=OneWay}" Width="80"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            <DataGrid x:Name="appointmentGrid" ItemsSource="{Binding Bookings}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="Auto">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="PickupTime" Binding="{Binding PickupTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOffDate" Binding="{Binding DropOffDate,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="DropOffTime" Binding="{Binding DropOffTime,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="BookedCar" Binding="{Binding BookedCar,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="CustomerName" Binding="{Binding CustomerName,Mode=OneWay}" Width="80"/>
+                                    <DataGridTextColumn Header="LicenceNo" Binding="{Binding LicenceNo,Mode=OneWay}" Width="80"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10 25 0 0">
                             <Label Name="lblSearch" Content="Car Name: " Width="150" />
                             <TextBox Name="txtSearch" Width="150" />
                         </StackPanel>
                     </StackPanel>
-                    
+
                 </StackPanel>
             </StackPanel>
         </StackPanel>
