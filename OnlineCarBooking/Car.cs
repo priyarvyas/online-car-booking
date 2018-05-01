@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCarBooking
 {
-    class Car
+   public class Car
     {
         string name;
         string model;
@@ -31,7 +31,7 @@ namespace OnlineCarBooking
         public uint NoOfSeats { get => noOfSeats; set => noOfSeats = value; }
 
 
-        public static Dictionary<int, List<Car>> CarList
+        public Dictionary<int, List<Car>> CarList
         {
             get
             {

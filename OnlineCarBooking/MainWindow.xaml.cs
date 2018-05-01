@@ -22,7 +22,7 @@ namespace OnlineCarBooking
     {
         List<string> listTime = new List<string>() { "10AM", "11AM", "12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM" };
         List<string> listSeatNo = new List<string>() { "2", "4", "5", "7","8" };
-        List<string> listSearch = new List<string>() { "", "4", "5", "6" };
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -49,7 +49,32 @@ namespace OnlineCarBooking
             cmbSeatNo.SelectedIndex = 0;
         }
 
-        
+        private void cmbSeatNo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string vSeatNo = cmbSeatNo.Text;
 
+            Car c = new Car();
+            Dictionary<int, List<Car>> carList = new Dictionary<int, List<Car>>();
+            carList = c.CarList;
+            if (vSeatNo != string.Empty)
+            {
+                foreach (var v in carList)
+                {
+                    //if (v.Key == Convert.ToInt32(vSeatNo))
+                    //{
+                        //listAvailCar.Items.Add(v.Value);
+                        foreach(var val in v.Value)
+                        {
+                            listAvailCar.Items.Add(val.CarList);
+                        }
+                    //}
+                }
+            }
+
+            if (vSeatNo == "2")
+            {
+                
+            }
+        }
     }
 }
