@@ -21,7 +21,8 @@ namespace OnlineCarBooking
     public partial class MainWindow : Window
     {
         List<string> listTime = new List<string>() { "10AM", "11AM", "12AM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM" };
-        List<string> listSeatNo = new List<string>() { "2", "4", "5", "6","8" };
+        List<string> listSeatNo = new List<string>() { "2", "4", "5", "7","8" };
+        List<string> listSearch = new List<string>() { "", "4", "5", "6" };
         public MainWindow()
         {
             InitializeComponent();
@@ -48,6 +49,7 @@ namespace OnlineCarBooking
             cmbSeatNo.SelectedIndex = 0;
         }
 
+        
 
     }
 }
