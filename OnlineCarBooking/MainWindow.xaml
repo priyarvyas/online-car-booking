@@ -25,7 +25,15 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPickupDate" Content="Pickup Date: " Foreground="Black" Width="150" />
-                            <DatePicker x:Name="dpPickupDate" Height="25" Width="150" />
+                            <DatePicker x:Name="dpPickupDate" Height="25" Width="150" >
+                                <DatePicker.SelectedDate>
+                                    <Binding Path="Booking.PickupDate" Mode="OneWayToSource" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:DateValidation/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </DatePicker.SelectedDate>
+                            </DatePicker>
                         </StackPanel>
                         
                         <StackPanel Orientation="Horizontal" Margin="10">
@@ -43,25 +51,25 @@
                         
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerFName" Content="Customer First Name: " Width="150" />
-                            <TextBox Name="txtCustomerFName" Width="150" />
+                            <TextBox Name="txtCustomerFName" Width="150" TextChanged="txtCustomerFName_TextChanged" />
                         </StackPanel>
                         
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPhoneNo" Content="Phone Number: " Width="150" />
-                            <TextBox Name="txtPhoneNo" Width="150" />
+                            <TextBox Name="txtPhoneNo" Width="150" TextChanged="txtPhoneNo_TextChanged" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblAddress" Content="Address: " Width="150" />
-                            <TextBox Name="txtAddress" Width="150" />
+                            <TextBox Name="txtAddress" Width="150" TextChanged="txtAddress_TextChanged" />
                         </StackPanel>
                         
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCity" Content="City: " Width="150" />
-                            <TextBox Name="txtCity" Width="150" />
+                            <TextBox Name="txtCity" Width="150" TextChanged="txtCity_TextChanged" />
                         </StackPanel>
                        
                         <StackPanel Orientation="Horizontal" Margin="100 10 10 10">
-                            <Button x:Name="btnCarBook" Content="Book The Car" Height="36" Width="214" />
+                            <Button x:Name="btnCarBook" Content="Book The Car" Height="36" Width="214" Click="btnCarBook_Click" />
                         </StackPanel>
                     </StackPanel>
 
@@ -82,15 +90,18 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblCustomerLName" Content="Customer Last Name: " Width="150" />
-                            <TextBox Name="txtCustomerLName" Width="150" />
+                            <TextBox Name="txtCustomerLName" Width="150" TextChanged="txtCustomerLName_TextChanged" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPostalCode" Content="Postal Code: " Width="150" />
-                            <TextBox Name="txtPostalCode" Width="150" />
+                            <TextBox Name="txtPostalCode" Width="150" TextChanged="txtPostalCode_TextChanged" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblDrivingLicenceNo" Content="Driving Licence No: " Width="150" />
-                            <TextBox Name="txtDrivingLicenceNo" Width="150" />
+                            <TextBox Name="txtDrivingLicenceNo" Width="150" TextChanged="txtDrivingLicenceNo_TextChanged" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <Label Name="lblErrorMessage" Content="" Width="auto" Height="auto" Foreground="Red" FontSize="16" />
                         </StackPanel>
                     </StackPanel>
 
