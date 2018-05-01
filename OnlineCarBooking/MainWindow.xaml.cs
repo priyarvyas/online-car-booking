@@ -70,7 +70,7 @@ namespace OnlineCarBooking
             dpDropOffDate.SelectedDate = DateTime.Now.AddDays(1);
             lblErrorMessage.Content = "";
             Bookings = new BookingList();
-            ReadFromXML();
+            bookingGrid.Items.Refresh();
         }
 
         private void cmbPickupTime_Loaded(object sender, RoutedEventArgs e)
@@ -297,7 +297,10 @@ namespace OnlineCarBooking
 
                 Booking booking = new Booking(pickupDate, pickupTime, dropoffDate, dropoffTime, customer, selectedCar);
                 Bookings.Add(booking);
+                bookingGrid.ItemsSource = Bookings;
+                bookingGrid.Items.Refresh();
                 WriteToXML();
+                
             }
             
         }

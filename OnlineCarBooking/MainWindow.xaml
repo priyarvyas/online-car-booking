@@ -107,7 +107,7 @@
 
                     <StackPanel Orientation="Vertical" Margin="50 10 10 10">
                         <StackPanel Orientation="Horizontal">
-                            <DataGrid x:Name="appointmentGrid" ItemsSource="{Binding Bookings}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="Auto">
+                            <DataGrid x:Name="bookingGrid" ItemsSource="{Binding Bookings}"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="Auto">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="PickupDate" Binding="{Binding PickupDate,Mode=OneWay}" Width="80"/>
                                     <DataGridTextColumn Header="PickupTime" Binding="{Binding PickupTime,Mode=OneWay}" Width="80"/>
