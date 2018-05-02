@@ -13,7 +13,7 @@
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="800">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label Name="lblPersonalTitle" Content="Online Car Booking System" Width="788" Foreground="Blue" 
+                    <Label Name="lblPersonalTitle" Content="Holiday Trip Car Booking " Width="788" Foreground="Blue" 
                  FontFamily="Times New Roman" FontSize="22" HorizontalContentAlignment="Center" FontWeight="Bold"
                        VerticalAlignment="Center"/>
                 </StackPanel>
@@ -28,14 +28,14 @@
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblPickupDate" Content="Pickup Date: " Foreground="Black" Width="150" />
-                            <DatePicker x:Name="dpPickupDate" Height="25" Width="150" SelectedDateChanged="dpPickupDate_SelectedDateChanged" >
+                            <DatePicker x:Name="dpPickupDate" Height="36" Width="150" SelectedDateChanged="dpPickupDate_SelectedDateChanged" >
                                 
                             </DatePicker>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblDropOffDate" Content="Drop-Off Date: " Foreground="Black" Width="150" />
-                            <DatePicker x:Name="dpDropOffDate" Height="25" Width="150" SelectedDateChanged="dpDropOffDate_SelectedDateChanged" />
+                            <DatePicker x:Name="dpDropOffDate" Height="34" Width="150" SelectedDateChanged="dpDropOffDate_SelectedDateChanged" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="10">
@@ -65,8 +65,13 @@
                             <TextBox Name="txtCity" Width="150" TextChanged="txtCity_TextChanged" />
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="100 10 10 10">
-                            <Button x:Name="btnCarBook" Content="Book The Car" Height="36" Width="214" Click="btnCarBook_Click" />
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                            <Button x:Name="btnCarBook" Content="Book The Car" Height="36" Width="120" Click="btnCarBook_Click" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Button x:Name="btnDisplay" Content="Display" Width="100" Click="btnDisplay_Click" Height="38"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
 
@@ -101,7 +106,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="10">
                             <Label Name="lblErrorMessage" Content="" Width="auto" Height="auto" Foreground="Red" FontSize="16" />
-                            <Button x:Name="btnDisplay" Content="Display" Width="75" Click="btnDisplay_Click"/>
+                            
                         </StackPanel>
                     </StackPanel>
 
