@@ -382,7 +382,8 @@ namespace OnlineCarBooking
 
                 Booking booking = new Booking(pickupDate, pickupTime, dropoffDate, dropoffTime, customer, selectedCar);
                 Bookings.Add(booking);
-                WriteToXML();    
+                WriteToXML();
+                ClearData();
             }
         }
 
@@ -450,5 +451,32 @@ namespace OnlineCarBooking
             var query = (from b in Bookings.bookings where b.Car.Name.Contains(carName) select b);
             bookingGrid.ItemsSource = query;
         }
+
+        private void ClearData()
+        {
+            try
+            {
+                dpPickupDate.SelectedDate = DateTime.Today;
+                dpDropOffDate.SelectedDate = DateTime.Now.AddDays(1);
+                cmbPickupTime.SelectedIndex = 1;
+                cmbDropOffTime.SelectedIndex = 1;
+                cmbSeatNo.SelectedIndex = 1;
+                listAvailCar.Items.Clear();
+                txtCustomerFName.Text = "";
+                txtCustomerLName.Text = "";
+                txtAddress.Text = "";
+                txtCity.Text = "";
+                txtPhoneNo.Text = "";
+                txtDrivingLicenceNo.Text = "";
+                txtPostalCode.Text = "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+
     }
 }
